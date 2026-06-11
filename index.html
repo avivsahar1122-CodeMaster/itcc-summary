@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>הכנה למבחן · מבוא לתקשורת מחשבים</title>
+<style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f5f6fa; --bg2: #ffffff; --bg3: #eef0f6; --border: #d0d4e8;
+  --text: #1a1d2e; --text2: #4a5068; --text3: #8890aa; --accent: #2563eb;
+  --blue-bg: #eff6ff; --blue-border: #bfdbfe; --blue-text: #1d4ed8;
+  --yellow-bg: #fffbeb; --yellow-border: #fcd34d; --yellow-text: #92400e;
+  --green-bg: #f0fdf4; --green-border: #86efac; --green-text: #166534;
+  --red-bg: #fef2f2; --red-border: #fca5a5; --red-text: #991b1b;
+  --purple-bg: #faf5ff; --purple-border: #d8b4fe; --purple-text: #6b21a8;
+  --gray-bg: #f8fafc; --gray-border: #e2e8f0;
+  --font: 'Segoe UI','Arial',sans-serif; --mono: 'Consolas','Monaco',monospace;
+}
+body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:15px; line-height:1.7; direction:rtl; }
+.layout { display:flex; min-height:100vh; }
+.sidebar { width:240px; min-width:240px; background:var(--bg2); border-left:1px solid var(--border); padding:1.5rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto; font-size:13px; box-shadow:2px 0 8px rgba(0,0,0,0.05); }
+.site-title { display:block; font-size:14px; font-weight:700; color:var(--accent); text-decoration:none; margin-bottom:0.4rem; }
+.site-title:hover { text-decoration:underline; }
+.nav-meta { color:var(--text3); font-size:11px; margin-bottom:1.5rem; line-height:1.5; }
+.nav-group { margin-bottom:1.2rem; }
+.nav-group-title { font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.4rem; }
+.nav-group a { display:flex; align-items:baseline; gap:0.4rem; padding:3px 6px; border-radius:4px; color:var(--text2); text-decoration:none; line-height:1.4; }
+.nav-group a:hover { background:var(--bg3); color:var(--text); }
+.nav-group a.active { background:#eff6ff; color:var(--accent); font-weight:600; }
+.nav-group a .num { font-size:10px; color:var(--text3); min-width:16px; }
+.content { flex:1; max-width:860px; padding:3rem 3.5rem; }
+.chapter-header { margin-bottom:1.5rem; }
+.chapter-number { font-size:12px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem; }
+h1 { font-size:2rem; font-weight:700; color:var(--text); line-height:1.25; margin-bottom:0.5rem; }
+.chapter-subtitle { font-size:14px; color:var(--text2); }
+.chapter-intro { background:var(--bg3); border-radius:8px; padding:1rem 1.25rem; color:var(--text2); font-size:14px; margin-bottom:2rem; border:1px solid var(--border); }
+.chapter-intro strong { color:var(--text); }
+h2 { font-size:1.25rem; font-weight:700; color:var(--text); margin:2.5rem 0 1rem; padding-bottom:0.4rem; border-bottom:2px solid var(--border); }
+h3 { font-size:1rem; font-weight:700; color:var(--text2); margin:1.5rem 0 0.6rem; }
+h4 { font-size:0.9rem; font-weight:700; color:var(--text3); margin:1.2rem 0 0.4rem; }
+.box { border-radius:6px; padding:1rem 1.25rem; margin:1rem 0; border-right:3px solid transparent; font-size:14px; }
+.box-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem; }
+.box-blue { background:var(--blue-bg); border-right-color:var(--blue-border); color:var(--text); }
+.box-blue .box-title { color:var(--blue-text); }
+.box-yellow { background:var(--yellow-bg); border-right-color:var(--yellow-border); color:var(--text); }
+.box-yellow .box-title { color:var(--yellow-text); }
+.box-green { background:var(--green-bg); border-right-color:var(--green-border); color:var(--text); }
+.box-green .box-title { color:var(--green-text); }
+.box-red { background:var(--red-bg); border-right-color:var(--red-border); color:var(--text); }
+.box-red .box-title { color:var(--red-text); }
+.box-purple { background:var(--purple-bg); border-right-color:var(--purple-border); color:var(--text); }
+.box-purple .box-title { color:var(--purple-text); }
+.box-gray { background:var(--gray-bg); border-right-color:var(--gray-border); color:var(--text2); border:1px solid var(--gray-border); }
+.box-gray .box-title { color:var(--text2); }
+.box ul, .box ol { padding-right:1.2rem; margin:0.4rem 0; }
+.box li { margin-bottom:0.3rem; }
+.box strong { color:inherit; font-weight:700; }
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border-radius:6px; overflow:hidden; margin:1rem 0; font-size:13px; }
+.compare-header { background:var(--bg3); padding:0.5rem 0.75rem; font-weight:700; font-size:12px; color:var(--text2); }
+.compare-cell { background:var(--bg2); padding:0.5rem 0.75rem; color:var(--text); }
+.compare-cell ul { padding-right:1rem; margin:0; }
+.compare-cell li { margin-bottom:0.2rem; }
+table { width:100%; border-collapse:collapse; font-size:13px; margin:1rem 0; }
+th { background:var(--bg3); color:var(--text2); padding:0.5rem 0.75rem; text-align:right; font-weight:600; border-bottom:2px solid var(--border); }
+td { padding:0.45rem 0.75rem; border-bottom:1px solid var(--border); color:var(--text); }
+tr:last-child td { border-bottom:none; }
+tr:nth-child(even) td { background:var(--bg3); }
+code { font-family:var(--mono); font-size:12px; color:var(--accent); background:var(--bg3); padding:1px 4px; border-radius:3px; border:1px solid var(--border); }
+.code-block { background:#1e1e2e; border:1px solid var(--border); border-radius:6px; padding:1rem 1.25rem; margin:1rem 0; font-family:var(--mono); font-size:13px; color:#cdd6f4; white-space:pre; overflow-x:auto; direction:ltr; text-align:left; }
+.code-block .filename { font-family:var(--font); font-size:11px; color:#888; margin-bottom:0.5rem; display:block; direction:rtl; text-align:right; }
+.exercise { border:1px solid var(--purple-border); border-radius:6px; overflow:hidden; margin:1rem 0; }
+.exercise-header { background:var(--purple-bg); padding:0.75rem 1rem; display:flex; align-items:flex-start; gap:0.75rem; }
+.exercise-icon { color:var(--purple-text); font-size:16px; flex-shrink:0; }
+.exercise-meta { flex:1; }
+.exercise-title { font-weight:700; font-size:14px; color:var(--text); }
+.exercise-source { font-size:12px; color:var(--text3); margin-top:2px; }
+.exercise-tags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.4rem; }
+.tag { font-size:11px; padding:1px 7px; border-radius:99px; background:var(--bg3); color:var(--text3); border:1px solid var(--border); }
+.exercise-body { padding:0.75rem 1rem; font-size:14px; border-top:1px solid var(--purple-border); background:var(--bg2); }
+details { width:100%; }
+details summary { cursor:pointer; color:var(--purple-text); font-size:13px; font-weight:600; padding:0.5rem 1rem; background:var(--purple-bg); border-top:1px solid var(--purple-border); list-style:none; user-select:none; }
+details summary::-webkit-details-marker { display:none; }
+details summary::before { content:'▶ '; font-size:10px; }
+details[open] summary::before { content:'▼ '; }
+.solution { padding:0.75rem 1rem; font-size:14px; background:var(--bg2); }
+.solution-step { margin-bottom:0.75rem; padding-right:1rem; border-right:2px solid var(--green-border); }
+.solution-step-title { font-weight:700; color:var(--green-text); font-size:13px; margin-bottom:0.3rem; }
+.math { font-family:var(--mono); color:#92400e; background:#fffbeb; border:1px solid #fcd34d; padding:0.5rem 1rem; border-radius:4px; display:block; margin:0.5rem 0; direction:ltr; text-align:center; font-size:14px; }
+.exam-tip { background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:0.75rem 1rem; font-size:13px; color:var(--text2); margin:1rem 0; }
+.exam-tip strong { color:var(--text); }
+@media (max-width:768px) { .layout { flex-direction:column; } .sidebar { width:100%; height:auto; position:static; } .content { padding:1.5rem; } }
+
+body { padding: 3rem 2rem; max-width: 840px; margin: 0 auto; }
+.hero-meta { font-size:12px; color:var(--text3); margin-bottom:0.5rem; }
+.hero-title { font-size:2.4rem; font-weight:700; margin-bottom:0.4rem; line-height:1.2; color:var(--text); }
+.hero-desc { color:var(--text2); margin-bottom:2rem; font-size:15px; }
+.hero-tags { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2.5rem; font-size:13px; color:var(--text2); }
+.hero-tags strong { color:var(--text); }
+.group-title { font-size:11px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.75rem; }
+.chapter-grid { display:grid; gap:0.5rem; margin-bottom:2rem; }
+.chapter-card { display:flex; align-items:flex-start; gap:1rem; padding:0.9rem 1rem; background:var(--bg2); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--text); transition:border-color 0.15s, box-shadow 0.15s; }
+.chapter-card:hover { border-color:var(--accent); box-shadow:0 2px 8px rgba(37,99,235,0.08); }
+.ch-num { font-size:11px; color:var(--text3); min-width:52px; padding-top:3px; }
+.ch-title { font-weight:700; margin-bottom:0.2rem; font-size:15px; }
+.ch-desc { font-size:13px; color:var(--text2); }
+.ch-tags { display:flex; gap:0.4rem; margin-top:0.4rem; flex-wrap:wrap; }
+.footer { margin-top:3rem; font-size:12px; color:var(--text3); text-align:center; padding-bottom:2rem; }
+</style></head>
+<body>
+<div class="hero-meta">מבוא לתקשורת מחשבים · Computer Networks</div>
+<h1 class="hero-title">הכנה למבחן</h1>
+<p class="hero-desc">8 פרקים מקיפים המכסים את כל חומר הקורס — ממודל השכבות ועד אבטחת רשתות. כל פרק כולל הגדרות, נוסחאות, טבלאות השוואה וצ'קליסט מבחן.</p>
+<div class="hero-tags">
+  <span>קורס · <strong>מבוא לתקשורת מחשבים</strong></span>
+  <span>פרקים · <strong>8 פרקים</strong></span>
+</div>
+
+<div class="group-title">יסודות</div>
+<div class="chapter-grid">
+  <a href="01-intro.html" class="chapter-card">
+    <span class="ch-num">פרק 01</span>
+    <div><div class="ch-title">מבוא ומודל השכבות</div>
+    <div class="ch-desc">OSI vs TCP/IP, אנקפסולציה, Physical Media, Throughput, איומי אבטחה</div>
+    <div class="ch-tags"><span class="tag">OSI</span><span class="tag">TCP/IP</span><span class="tag">אנקפסולציה</span></div></div>
+  </a>
+  <a href="02-architecture.html" class="chapter-card">
+    <span class="ch-num">פרק 02</span>
+    <div><div class="ch-title">ארכיטקטורת רשת ומושגי יסוד</div>
+    <div class="ch-desc">Circuit vs Packet Switching, Store &amp; Forward, 4 סוגי השהיה + נוסחאות</div>
+    <div class="ch-tags"><span class="tag">Packet Switching</span><span class="tag">Delays</span><span class="tag">FDM/TDM</span></div></div>
+  </a>
+</div>
+
+<div class="group-title">שכבת האפליקציה</div>
+<div class="chapter-grid">
+  <a href="03-http-dns.html" class="chapter-card">
+    <span class="ch-num">פרק 03</span>
+    <div><div class="ch-title">HTTP ו-DNS</div>
+    <div class="ch-desc">Non/Persistent HTTP + RTT, Cookies, Web Cache, DNS Iterative/Recursive, Resource Records</div>
+    <div class="ch-tags"><span class="tag">HTTP</span><span class="tag">DNS</span><span class="tag">Cookies</span><span class="tag">RTT</span></div></div>
+  </a>
+</div>
+
+<div class="group-title">שכבת התובלה</div>
+<div class="chapter-grid">
+  <a href="04-udp.html" class="chapter-card">
+    <span class="ch-num">פרק 04</span>
+    <div><div class="ch-title">שכבת התובלה — UDP</div>
+    <div class="ch-desc">Multiplexing/Demux, UDP Header (8B), Checksum, Endianness, Port Ranges</div>
+    <div class="ch-tags"><span class="tag">UDP</span><span class="tag">Sockets</span><span class="tag">Checksum</span></div></div>
+  </a>
+  <a href="05-tcp.html" class="chapter-card">
+    <span class="ch-num">פרק 05</span>
+    <div><div class="ch-title">פרוטוקול TCP ואמינות נתונים</div>
+    <div class="ch-desc">GBN vs SR, AIMD Congestion Control, 3-Way Handshake, ACK Generation, Nagle, Wrap Around</div>
+    <div class="ch-tags"><span class="tag">TCP</span><span class="tag">AIMD</span><span class="tag">Handshake</span><span class="tag">GBN/SR</span></div></div>
+  </a>
+</div>
+
+<div class="group-title">שכבת הרשת</div>
+<div class="chapter-grid">
+  <a href="06-network.html" class="chapter-card">
+    <span class="ch-num">פרק 06</span>
+    <div><div class="ch-title">שכבת הרשת — Network Layer</div>
+    <div class="ch-desc">IP Datagram, Fragmentation, CIDR, DHCP, NAT, ICMP, RIP, OSPF, IPv6</div>
+    <div class="ch-tags"><span class="tag">IP</span><span class="tag">DHCP</span><span class="tag">NAT</span><span class="tag">RIP</span><span class="tag">OSPF</span></div></div>
+  </a>
+</div>
+
+<div class="group-title">שכבת עורק הנתונים</div>
+<div class="chapter-grid">
+  <a href="07-data-link.html" class="chapter-card">
+    <span class="ch-num">פרק 07</span>
+    <div><div class="ch-title">שכבת עורק הנתונים — Data Link</div>
+    <div class="ch-desc">CRC, Aloha (18%/37%), CSMA/CD, MAC Address, ARP, Ethernet Frame, Switch, Spanning Tree</div>
+    <div class="ch-tags"><span class="tag">MAC</span><span class="tag">ARP</span><span class="tag">Ethernet</span><span class="tag">CSMA/CD</span><span class="tag">Switch</span></div></div>
+  </a>
+</div>
+
+<div class="group-title">אבטחה</div>
+<div class="chapter-grid">
+  <a href="08-security.html" class="chapter-card">
+    <span class="ch-num">פרק 08</span>
+    <div><div class="ch-title">אבטחת רשתות</div>
+    <div class="ch-desc">AES vs RSA, Digital Signatures, CA, Hash, MAC, Nonce, SSL/TLS, Truncation Attack</div>
+    <div class="ch-tags"><span class="tag">AES</span><span class="tag">RSA</span><span class="tag">SSL/TLS</span><span class="tag">Hash/MAC</span></div></div>
+  </a>
+</div>
+
+<div class="footer">כל הפרקים בנויים לקריאה עצמית · מבוסס על חומר הקורס</div>
+</body></html>
